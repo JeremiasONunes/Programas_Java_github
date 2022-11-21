@@ -1,10 +1,7 @@
 package br.edu.univas;
-
-import java.time.temporal.TemporalAmount;
 import java.util.Scanner;
-
+import java.util.Arrays;
 public class dictionarie {
-
 	public static void main(String[] args) {
 		
 		// utilitarios
@@ -14,41 +11,30 @@ public class dictionarie {
 		String[] wordEN= new String[100];
 		String[] wordPT = new String[100];
 		String[] meaning = new String[100];
-		int amount;
 		int contador = 0;
 		boolean status;
 		boolean status1;
-		String word1 = "vazio";
-		String word2 = "vazio";
-		String word3 = "vazio";	
-		
-		// menu de interação direta
-		int option;
-		//variaveis locais para uso local
-		String word_temporal;
-		String meaning_temporal;
 		int word_temp;
 		int meaning_temp;
 		int option2;
-		String new_word;
-		
-		
+		int option;
+		String word3 = "vazio";	
 		//menu de interação do usuario
 		do {
+			word_temp=0;
+			meaning_temp=0;
         System.out.print("|-----------------------------|\n");
-        System.out.print("| Opção 1 - Novo Cadastro     |\n");
-        System.out.print("| Opção 2 - Alterar palavra   |\n");
-        System.out.print("| Opção 3 - Buscar palavra    |\n");
-        System.out.print("| Opção 4 - Excluir palavra   |\n");
-        System.out.print("| Opção 5 - Sair              |\n");
+        System.out.print("| Option 1 - New Registration |\n");
+        System.out.print("| Option 2 - Change word      |\n");
+        System.out.print("| Option 3 - Search word      |\n");
+        System.out.print("| Option 4 - Delete word      |\n");
+        System.out.print("| Option 5 - exit             |\n");
         System.out.print("|-----------------------------|\n");
-        System.out.print("Digite uma opção: ");
+        System.out.print("enter an option: ");
         option = sc.nextInt();
         sc.nextLine();
-        
         switch (option) {
-		case 1:
-						
+		case 1:			
 			do {
 				System.out.println("type the word english");
 				wordEN[contador] = sc.nextLine();
@@ -61,13 +47,10 @@ public class dictionarie {
 				
 				status = searchDuplicate(wordEN);
 				if(status == false) {
-					
 					contador++;
-					status1=false;
-					
-				}else {
-					
-					System.out.println("palavra repetida digita outra");
+					status1=false;	
+				}else {	
+					System.out.println("repeated word type another");
 					status1=true;
 				}
 			}while(status1 == true);
@@ -76,9 +59,9 @@ public class dictionarie {
 		case 2:
 			
 			System.out.print("|------------------------------------|\n");
-	        System.out.print("| Opção 1 - alteral em ingles        |\n");
-	        System.out.print("| Opção 2 - alteral em portugues     |\n");
-	        System.out.print("| Opção 3 - alteral em seguinficado  |\n");
+	        System.out.print("| Option 1 - change in English       |\n");
+	        System.out.print("| Option 2 - change in portuguese    |\n");
+	        System.out.print("| Option 3 - change the a meaning    |\n");
 	        System.out.print("|------------------------------------|\n");
 	        System.out.print("Digite uma opção: ");
 	        option2 = sc.nextInt();
@@ -89,7 +72,7 @@ public class dictionarie {
 			case 1:
 				System.out.println("type the word english");
 				word3 = sc.nextLine();			
-				word_temp  = searchWord(wordEN, wordEN, word3);
+				word_temp  = search(wordEN, wordEN, word3);
 				System.out.println("type the new word english");
 				wordEN[word_temp] = sc.nextLine();
 				
@@ -97,14 +80,14 @@ public class dictionarie {
 			case 2:
 				System.out.println("type the word portuguese");
 				word3 = sc.nextLine();
-				word_temp  = searchWord(wordEN, wordEN, word3);
+				word_temp  = search(wordEN, wordEN, word3);
 				System.out.println("type the new word portuguese");
 				wordPT[word_temp] = sc.nextLine();
 				break;
 			case 3:
 				System.out.println("type the word english for seach in dicitionary");
 				word3 = sc.nextLine();			
-				word_temp  = searchWord(wordEN, wordEN, word3);
+				word_temp  = search(wordEN, wordEN, word3);
 				System.out.println("type the new meaning in english or portuguese");
 				meaning[word_temp] = sc.nextLine();
 				
@@ -117,11 +100,11 @@ public class dictionarie {
 			break;
 		case 3:
 			
-			System.out.print("|-----------------------------|\n");
-	        System.out.print("| Opção 1 - busca em ingles   |\n");
-	        System.out.print("| Opção 2 - busca em portugues|\n");
-	        System.out.print("|-----------------------------|\n");
-	        System.out.print("Digite uma opção: ");
+			System.out.print("|---------------------------------|\n");
+	        System.out.print("| Option 1 - search in English    |\n");
+	        System.out.print("| Option 2 - Search in Portuguese |\n");
+	        System.out.print("|---------------------------------|\n");
+	        System.out.print("enter an option: ");
 	        option2 = sc.nextInt();
 	        sc.nextLine();
 	        
@@ -129,21 +112,27 @@ public class dictionarie {
 	        switch (option2) {
 			case 1:
 				System.out.println("type the word english");
-				 word3 = sc.nextLine();
+				word3 = sc.nextLine();
 							
-				word_temp  = searchWord(wordEN, wordEN, word3);
-				meaning_temp =meaning(wordEN, meaning, word3);
+				word_temp  = search(wordEN, wordEN, word3);
+				meaning_temp =search(wordEN, meaning, word3);
+				if(word_temp != -1) { 
 				System.out.println(wordPT[word_temp]);
 				System.out.println(meaning[meaning_temp]);
+				}else 
+					System.out.println("palavra não existe");
 				
 				break;
 			case 2:
 				System.out.println("type the word portuguese");
 				word3 = sc.nextLine();
-				word_temp  = searchWord(wordPT, wordEN, word3);
-				meaning_temp =meaning(wordPT, meaning, word3);
+				word_temp  = search(wordPT, wordEN, word3);
+				meaning_temp =search(wordPT, meaning, word3);
+				if(word_temp != -1) {
 				System.out.println(wordEN[word_temp]);
 				System.out.println(meaning[meaning_temp]);
+				}else
+					System.out.println("palavra não existe");
 				break;
 			default:
 				break;
@@ -151,10 +140,10 @@ public class dictionarie {
 			break;
 		case 4:
 			System.out.print("|------------------------------------|\n");
-	        System.out.print("| Opção 1 - excluir em ingles        |\n");
-	        System.out.print("| Opção 2 - excluir em portugues     |\n");
+	        System.out.print("| Option 1 - Delete in English       |\n");
+	        System.out.print("| Option 2 - Delete in Portuguese    |\n");
 	        System.out.print("|------------------------------------|\n");
-	        System.out.print("Digite uma opção: ");
+	        System.out.print("enter an option: ");
 	        option2 = sc.nextInt();
 	        sc.nextLine();
 	        
@@ -163,21 +152,26 @@ public class dictionarie {
 			case 1:
 				System.out.println("type the word english");
 				word3 = sc.nextLine();			
-				word_temp  = searchWord(wordEN, wordEN, word3);
+				word_temp  = search(wordEN, wordEN, word3);
+				if(word_temp != -1) {
 				System.out.println("word deleted");
-				wordEN[word_temp] = "word deleted by the user ";
-				wordPT[word_temp] = "palavra deletada pelo usuario";
-				meaning[word_temp] = "palavra deletada pelo usuario";
+				wordEN[word_temp] = "palavra deletada pelo usuario ";
+				wordPT[word_temp] = "word deleted by the user";
+				meaning[word_temp] = "palavra deletada pelo usuario/word deleted by the user";
+				}else
+					System.out.println("palavra não existe");
 				break;
 			case 2:
 				System.out.println("type the word portuguese");
 				word3 = sc.nextLine();
-				word_temp  = searchWord(wordEN, wordEN, word3);
+				word_temp  = search(wordEN, wordEN, word3);
+				if(word_temp != -1) {
 				System.out.println("palavra deletada");
-				wordEN[word_temp] = "word deleted by the user ";
-				wordPT[word_temp] = "palavra deletada pelo usuario";
-				meaning[word_temp] = "palavra deletada pelo usuario";
-				
+				wordEN[word_temp] = "palavra deletada pelo usuario ";
+				wordPT[word_temp] = "word deleted by the user";
+				meaning[word_temp] = "palavra deletada pelo usuario/word deleted by the user";
+				}else
+					System.out.println("palavra não existe");
 				break;
 
 		default:
@@ -202,27 +196,10 @@ public class dictionarie {
 	    return false;		
 	}
 	//metodo return tradução
-	public static int searchWord(String[] word01,String[] word02,String word03) {		
-		for (int i = 0; i < word01.length; i++)
-	    {	        
-	            if (word01[i] != null && word01[i].equals(word03)) {
-	            	
-	            	int index = word01[i].indexOf(word03);
-	                return index;
-	            }	        
-	    }
-		return 0;		
-	}
+	public static int search(String[] word01,String[] word02,String word03) {			
+	         int index = Arrays.asList(word01).indexOf(word03);            	
+	         return index;
 		
-	//metodo retorn sigficado
-public static int meaning(String[] word01,String[] meaning,String word03) {		
-		for (int i = 0; i < word01.length; i++)
-	    {	        
-	            if (word01[i] != null && word01[i].equals(word03)) {
-	            	int index = word01[i].indexOf(word03);
-	                return index;
-	            }	        
-	    }
-		return 0;		
 	}
+
 }
