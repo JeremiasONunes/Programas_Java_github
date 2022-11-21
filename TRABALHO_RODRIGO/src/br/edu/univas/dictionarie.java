@@ -17,7 +17,7 @@ public class dictionarie {
 		int option2;
 		int option;
 		String word3 = "vazio";	
-		//menu de interaÁ„o do usuario
+		//menu de intera√ß√£o do usuario
 		do {
 			word_temp=0;
 			meaning_temp=0;
@@ -55,7 +55,7 @@ public class dictionarie {
 	        System.out.print("| Option 2 - change in portuguese    |\n");
 	        System.out.print("| Option 3 - change the a meaning    |\n");
 	        System.out.print("|------------------------------------|\n");
-	        System.out.print("Digite uma opÁ„o: ");
+	        System.out.print("Digite uma op√ß√£o: ");
 	        option2 = sc.nextInt();
 	        sc.nextLine();	        
 	        switch (option2) {
@@ -63,22 +63,31 @@ public class dictionarie {
 				System.out.println("type the word english");
 				word3 = sc.nextLine();			
 				word_temp  = search(wordEN, wordEN, word3);
+				if(word_temp != -1) {
 				System.out.println("type the new word english");
-				wordEN[word_temp] = sc.nextLine();				
+				wordEN[word_temp] = sc.nextLine();
+				}else
+				System.out.println("palavra n√£o existe");
 				break;
 			case 2:
 				System.out.println("type the word portuguese");
 				word3 = sc.nextLine();
 				word_temp  = search(wordEN, wordEN, word3);
+				if(word_temp != -1) {
 				System.out.println("type the new word portuguese");
 				wordPT[word_temp] = sc.nextLine();
+				}else
+				System.out.println("palavra n√£o existe");
 				break;
 			case 3:
 				System.out.println("type the word english for seach in dicitionary");
 				word3 = sc.nextLine();			
 				word_temp  = search(wordEN, wordEN, word3);
+				if(word_temp != -1) {
 				System.out.println("type the new meaning in english or portuguese");
-				meaning[word_temp] = sc.nextLine();				
+				meaning[word_temp] = sc.nextLine();
+				}else
+				System.out.println("palavra n√£o existe");
 				break;
 			default:
 				break;
@@ -102,7 +111,7 @@ public class dictionarie {
 				System.out.println(wordPT[word_temp]);
 				System.out.println(meaning[meaning_temp]);
 				}else 
-					System.out.println("palavra n„o existe");				
+					System.out.println("palavra n√£o existe");				
 				break;
 			case 2:
 				System.out.println("type the word portuguese");
@@ -113,7 +122,7 @@ public class dictionarie {
 				System.out.println(wordEN[word_temp]);
 				System.out.println(meaning[meaning_temp]);
 				}else
-					System.out.println("palavra n„o existe");
+					System.out.println("palavra n√£o existe");
 				break;
 			default:
 				break;
@@ -138,7 +147,7 @@ public class dictionarie {
 				wordPT[word_temp] = "word deleted by the user";
 				meaning[word_temp] = "palavra deletada pelo usuario/word deleted by the user";
 				}else
-					System.out.println("palavra n„o existe");
+					System.out.println("palavra n√£o existe");
 				break;
 			case 2:
 				System.out.println("type the word portuguese");
@@ -150,7 +159,7 @@ public class dictionarie {
 				wordPT[word_temp] = "word deleted by the user";
 				meaning[word_temp] = "palavra deletada pelo usuario/word deleted by the user";
 				}else
-					System.out.println("palavra n„o existe");
+					System.out.println("palavra n√£o existe");
 				break;
 		default:
 			break;
@@ -173,7 +182,7 @@ public class dictionarie {
 	    // nenhuma duplicata foi encontrada
 	    return false;		
 	}
-	//metodo return traduÁ„o
+	//metodo return tradu√ß√£o
 	public static int search(String[] word01,String[] word02,String word03) {			
 	         int index = Arrays.asList(word01).indexOf(word03);            	
 	         return index;
